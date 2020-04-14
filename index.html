@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <style>
+        #mapid { 
+            height: 100%; height: 100%;
+             }
+        .map{
+            border:1px solid black;
+            height:80vh;
+            width:80vw;
+            margin:50px auto
+        }
+        .popup{
+            padding: 100px;
+        }
+       
+    </style>
+</header>
+<body>
+
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+   <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+      <section class="map">
+        <div id="mapid"></div>
+      </section>
+
+<script>
+       var mymap = L.map('mapid').setView([30.0604632, 31.2511902], 10);
+        var layerGroup = L.layerGroup().addTo(mymap)
+
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+
+
+            accessToken: 'pk.eyJ1IjoiaW1tb3J0YWxtaW5kIiwiYSI6ImNqemxxbHplYjAyb24zY2xjd2Nmcjh4eTMifQ.FZdAASpd_gN1ETCzRPWsGg'
+        }).addTo(mymap);
+
+
+        var turbinIcon = L.icon({
+            iconUrl: '/marker.png'
+            , iconSize: [30, 30],
+            layerGroup: {},
+         
+
+        
+
+        });
+
+let points=[
+    {latlong:[30.0604632, 31.2511902],numbers:541},
+ 
+    {latlong:[30.7930755,31.0168661],numbers:1258},
+    {latlong:[30.1249888,31.648746],numbers:120},
+
+    {latlong:[  30.0629858,31.4562559],numbers:140},
+  
+
+    
+]
+
+points.forEach((point)=>{
+    var circle = L.circle(point.latlong, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 2000
+}).addTo(mymap);
+         
+circle.bindPopup(`
+     
+    numbers : ${point.numbers}
+`)
+})
+    
+
+</script>
+
+</body>
+</html>

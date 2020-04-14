@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <style>
+        #mapid { 
+            height: 100%; height: 100%;
+             }
+        .map{
+            border:1px solid black;
+            height:80vh;
+            width:100%;
+            margin:50px auto
+        }
+        .popup{
+            padding: 100px;
+        }
+        .user{
+            margin-top: 50px;
+            padding:10px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow:0px 1px 4px #d6d6d6;
+        }
+        .user__image{
+            width: 120px;
+    margin-bottom: 31px;
+        }
+    </style>
+</header>
+<body>
+
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" ></script>
+ <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<div class="container-fluid">
+
+    <div class="row">
+<div class="col-3">
+<div class="user">
+    <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light" class="user__image">
+        
+    </img>
+    
+    <div class="user__info">
+        <p>Ahmed Adel</p>
+        <p>20 years</p>
+        <p>01100245871</p>
+        
+    </div>
+</div>
+</div>
+<div class="col-9">
+    <div class="map">
+        <div id="mapid"></div>
+      </div>
+</div>
+
+    </div>
+</div>
+     
+
+<script>
+       var mymap = L.map('mapid').setView([30.0604632, 31.01], 13);
+        var layerGroup = L.layerGroup().addTo(mymap)
+
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+
+
+            accessToken: 'pk.eyJ1IjoiaW1tb3J0YWxtaW5kIiwiYSI6ImNqemxxbHplYjAyb24zY2xjd2Nmcjh4eTMifQ.FZdAASpd_gN1ETCzRPWsGg'
+        }).addTo(mymap);
+
+
+        var turbinIcon = L.icon({
+            iconUrl: '/marker.png'
+            , iconSize: [30, 30],
+            layerGroup: {},
+         
+
+        
+
+        });
+
+let points=[
+    {latlong:[30.090000, 31.01],date:"14/4/2020 10:00 AM ",time:"15 minutes"},
+    {latlong:[30.0604632, 31.02],date:"14/4/2020 10:00 AM",time:"20 minutes"},
+    {latlong:[30.0604632, 31.03],date:"14/4/2020 10:00 AM",time:"30 minutes"},
+    {latlong:[30.0604632, 31.04],date:"14/4/2020 10:00 AM",time:"10 minutes"},
+
+  
+
+    
+]
+var pointList=[]
+
+points.forEach((point)=>{
+    var marker = L.marker(point.latlong, {
+ 
+}).addTo(mymap);
+
+    
+
+pointList.push(point.latlong)
+
+marker.bindPopup(`
+    Date : ${point.date}
+    time : ${point.time}
+`)
+})
+
+var pointA = new L.LatLng(30.090000, 31.01);
+var pointB = new L.LatLng(30.0604632, 31.02);
+var pointC = new L.LatLng(30.0604632, 31.03);
+var pointD = new L.LatLng(30.0604632, 31.04);
+
+
+
+var pathLine = L.polyline(pointList).addTo(mymap)
+
+firstpolyline.addTo(mymap);
+
+
+</script>
+
+</body>
+</html>
